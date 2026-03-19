@@ -1,0 +1,1 @@
+export default function SectionReveal({ children }) { return <div>{children}</div> }
