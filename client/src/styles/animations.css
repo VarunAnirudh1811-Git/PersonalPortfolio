@@ -1,0 +1,68 @@
+/* ============================================
+   ANIMATIONS — Reusable keyframes
+   ============================================ */
+
+@import './theme.css';
+
+/* --- Fade in up (section reveals) --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Fade in (simple) --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Glow pulse (accent elements) --- */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: var(--shadow-accent); }
+  50%       { box-shadow: 0 0 40px rgba(255, 107, 43, 0.7); }
+}
+
+/* --- Float (hero elements) --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* --- Shimmer (loading states) --- */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* --- Cursor scale --- */
+@keyframes cursorExpand {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-50%, -50%) scale(1.5); }
+}
+
+/* --- Utility classes --- */
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s var(--transition-slow) both;
+}
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease both;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-glowPulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* --- Stagger delays for children --- */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }

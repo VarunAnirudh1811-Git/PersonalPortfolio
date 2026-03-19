@@ -1,0 +1,74 @@
+/* ============================================
+   THEME — Single source of truth
+   All colors, fonts, spacing defined here.
+   Reference these variables everywhere else.
+   ============================================ */
+
+:root {
+  /* --- Colors --- */
+  --color-bg:           #0a0e1a;   /* deep navy — main background */
+  --color-bg-alt:       #0d1526;   /* slightly lighter navy — section alt bg */
+  --color-primary:      #1a3a6e;   /* ocean blue — cards, panels */
+  --color-primary-dark: #0f2347;   /* darker blue — hover states */
+  --color-accent:       #ff6b2b;   /* burnt orange — highlights, glows, CTAs */
+  --color-accent-soft:  #ff6b2b26; /* orange at 15% opacity — subtle fills */
+  --color-glow:         #4d9fff;   /* sky blue — glow effects, links */
+  --color-glow-soft:    #4d9fff1a; /* sky blue at 10% opacity */
+  --color-text:         #e8eaf6;   /* off-white — primary text */
+  --color-text-muted:   #7986a8;   /* slate — secondary text, captions */
+  --color-border:       #1e2d4d;   /* subtle border color */
+  --color-navbar-solid: #0a0e1af2; /* navbar bg after scroll (95% opacity) */
+
+  /* --- Typography --- */
+  --font-display: 'Cinzel', serif;         /* headings — dramatic, bold */
+  --font-body:    'Outfit', sans-serif;    /* body — clean, modern */
+  --font-mono:    'JetBrains Mono', monospace; /* code / tags */
+
+  /* --- Font Sizes (fluid) --- */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  3rem;
+  --text-5xl:  4.5rem;
+  --text-hero: clamp(3.5rem, 10vw, 8rem);
+
+  /* --- Spacing --- */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+  --space-2xl: 10rem;
+
+  /* --- Layout --- */
+  --max-width:     1200px;
+  --navbar-height: 70px;
+  --radius-sm:     6px;
+  --radius-md:     12px;
+  --radius-lg:     20px;
+
+  /* --- Transitions --- */
+  --transition-fast:   150ms ease;
+  --transition-base:   300ms ease;
+  --transition-slow:   600ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Shadows --- */
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:     0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 0 20px rgba(255, 107, 43, 0.4);
+  --shadow-glow:   0 0 30px rgba(77, 159, 255, 0.3);
+
+  /* --- Parallax layer speeds (used in JS) --- */
+  --parallax-sky:        0.1;
+  --parallax-moon:       0.15;
+  --parallax-clouds-far: 0.2;
+  --parallax-mountains:  0.35;
+  --parallax-clouds-near:0.45;
+  --parallax-foreground: 0.6;
+}	
