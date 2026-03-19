@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import './Navbar.css'
-import { label } from 'framer-motion/client'
 
 const NAV_LINKS = [
-  {label: 'About', href: '#about' },
-  {label: 'Games', href: '#games' },
-  {label: 'Hobbies', href: '#hobbies' },
-  {label: 'Contact', href: '#contact' },
+  { label: 'About',   href: '#about'   },
+  { label: 'Games',   href: '#games'   },
+  { label: 'Hobbies', href: '#hobbies' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
@@ -55,6 +54,9 @@ export default function Navbar() {
               )
             })}
           </ul>
+          <a href="/assets/resume.pdf" download="Varun_Anirudh_Resume.pdf" className="navbar__resume">
+            Resume ↓
+          </a>
           <a href="#contact" className="navbar__cta" onClick={function(e) { handleNavClick(e, '#contact') }}>
             Hire Me
           </a>
@@ -73,11 +75,13 @@ export default function Navbar() {
             </a>
           )
         })}
+        <a href="/assets/resume.pdf" download="Varun_Anirudh_Resume.pdf" className="navbar__resume">
+          Resume ↓
+        </a>
         <a href="#contact" className="navbar__cta" onClick={function(e) { handleNavClick(e, '#contact') }}>
           Hire Me
         </a>
       </div>
     </div>
   )
-
 }

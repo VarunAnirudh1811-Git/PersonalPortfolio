@@ -200,3 +200,28 @@
   .navbar__hamburger { display: flex; }
   .navbar__mobile    { display: flex; }
 }
+
+.navbar__resume {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navbar__resume:hover {
+  color: var(--color-glow);
+  border-color: var(--color-glow);
+}
+
+@media (max-width: 768px) {
+  .navbar__resume { display: none; }
+}
