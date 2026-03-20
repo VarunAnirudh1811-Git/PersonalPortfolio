@@ -1,10 +1,10 @@
-import Navbar from './components/layout/Navbar/Navbar'
-import Cursor from './components/common/Cursor/Cursor'
-import Hero from './components/sections/Hero/Hero'
-import About from './components/sections/About/About'
-import Games from './components/sections/Games/Games'
-import Hobbies from './components/sections/Hobbies/Hobbies'
-import Contact from './components/sections/Contact/Contact'
+import Navbar from '../components/layout/Navbar/Navbar'
+import Cursor from '../components/common/Cursor/Cursor'
+import Hero from '../components/sections/Hero/Hero'
+import About from '../components/sections/About/About'
+import Games from '../components/sections/Games/Games'
+import Hobbies from '../components/sections/Hobbies/Hobbies'
+import Contact from '../components/sections/Contact/Contact'
 
 function App() {
   return (
