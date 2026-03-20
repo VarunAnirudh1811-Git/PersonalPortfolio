@@ -5,7 +5,6 @@ const NAV_LINKS = [
   { label: 'About',   href: '#about'   },
   { label: 'Games',   href: '#games'   },
   { label: 'Hobbies', href: '#hobbies' },
-  { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
