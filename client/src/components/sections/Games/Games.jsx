@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Games.css'
 
 const GAMES = [
@@ -10,18 +10,45 @@ const GAMES = [
   { id: 6, title: 'Cipher',         genre: 'Puzzle',         year: '2021', description: 'A minimalist puzzle game built around cryptographic ciphers and pattern recognition.',        tags: ['Unity', 'C#', 'Puzzle Design'],    color: '#f59e0b' },
 ]
 
-const VISIBLE = 3
-
 export default function Games() {
   const [index, setIndex]   = useState(0)
   const [hovered, setHovered] = useState(null)
+  const [visible, setVisible] = useState(3)
+
+  // Update VISIBLE count based on window width (matches CSS breakpoints)
+  useEffect(function() {
+    function updateVisible() {
+      if (window.innerWidth <= 580) {
+        setVisible(1)
+      } else if (window.innerWidth <= 900) {
+        setVisible(2)
+      } else {
+        setVisible(3)
+      }
+    }
+    updateVisible()
+    window.addEventListener('resize', updateVisible)
+    return function() { window.removeEventListener('resize', updateVisible) }
+  }, [])
+
+  // Reset index if it's out of bounds when visible changes
+  useEffect(function() {
+    if (index > GAMES.length - visible) {
+      setIndex(Math.max(0, GAMES.length - visible))
+    }
+  }, [visible])
+
+  // Clear hovered state when slide changes
+  useEffect(function() {
+    setHovered(null)
+  }, [index])
 
   function prev() {
     setIndex(function(i) { return Math.max(0, i - 1) })
   }
 
   function next() {
-    setIndex(function(i) { return Math.min(GAMES.length - VISIBLE, i + 1) })
+    setIndex(function(i) { return Math.min(GAMES.length - visible, i + 1) })
   }
 
   function goTo(i) {
@@ -29,9 +56,9 @@ export default function Games() {
   }
 
   var canPrev  = index > 0
-  var canNext  = index < GAMES.length - VISIBLE
-  var visible  = GAMES.slice(index, index + VISIBLE)
-  var dotCount = GAMES.length - VISIBLE + 1
+  var canNext  = index < GAMES.length - visible
+  var visibleGames  = GAMES.slice(index, index + visible)
+  var dotCount = GAMES.length - visible + 1
 
   return (
     <section className="games section" id="games">
@@ -60,7 +87,7 @@ export default function Games() {
         </button>
 
         <div className="games__track">
-          {visible.map(function(game) {
+          {visibleGames.map(function(game) {
             return (
               <div
                 key={game.id}

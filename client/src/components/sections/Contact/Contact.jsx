@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './Contact.css'
 
 const SOCIALS = [
@@ -12,6 +12,16 @@ export default function Contact() {
   const [form, setForm]     = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState('idle')
   const [error, setError]   = useState('')
+  const abortControllerRef  = useRef(null)
+
+  // Cleanup AbortController on unmount
+  useEffect(function() {
+    return function() {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+  }, [])
 
   function handleChange(e) {
     var field = e.target.name
@@ -31,10 +41,15 @@ export default function Contact() {
     }
     setError('')
     setStatus('loading')
+    
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController()
+    
     fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
+      signal: abortControllerRef.current.signal
     })
     .then(function(res) { return res.json() })
     .then(function(data) {
@@ -46,9 +61,12 @@ export default function Contact() {
         setError(data.error || 'Something went wrong.')
       }
     })
-    .catch(function() {
-      setStatus('error')
-      setError('Could not send message. Please try again.')
+    .catch(function(err) {
+      // Don't set error if request was aborted (unmounted)
+      if (err.name !== 'AbortError') {
+        setStatus('error')
+        setError('Could not send message. Please try again.')
+      }
     })
   }
 
@@ -59,7 +77,6 @@ export default function Contact() {
 
   function renderSocials() {
     return SOCIALS.map(function(s) {
-      var el = document.createElement('a')
       return (
         <a key={s.label} href={s.href} className="contact__social" target="_blank" rel="noreferrer">
           <span className="contact__social-icon">{s.icon}</span>
@@ -106,7 +123,7 @@ export default function Contact() {
           </div>
 
           <div className="contact__right">
-            <div className="contact__form-wrap">
+            <form className="contact__form-wrap" onSubmit={handleSubmit}>
 
               <div className="contact__field">
                 <label className="contact__label" htmlFor="name">Name</label>
@@ -154,14 +171,14 @@ export default function Contact() {
               )}
 
               <button
+                type="submit"
                 className={status === 'loading' ? 'contact__btn contact__btn--loading' : 'contact__btn'}
                 disabled={status === 'loading'}
-                onClick={handleSubmit}
               >
                 {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
 
-            </div>
+            </form>
           </div>
 
         </div>

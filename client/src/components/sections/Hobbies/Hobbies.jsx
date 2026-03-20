@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Hobbies.css'
 
 const TABS = ['Electronics', 'Painting']
@@ -20,6 +20,11 @@ const PAINTINGS = [
 export default function Hobbies() {
   const [activeTab, setActiveTab] = useState(0)
   const [hovered, setHovered] = useState(null)
+
+  // Reset hovered state when tab changes
+  useEffect(function() {
+    setHovered(null)
+  }, [activeTab])
 
   var items = activeTab === 0 ? ELECTRONICS : PAINTINGS
 

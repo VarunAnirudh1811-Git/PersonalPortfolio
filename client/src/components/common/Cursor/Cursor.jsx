@@ -20,11 +20,13 @@ export default function Cursor() {
       dot.style.transform = 'translate(' + mouseX + 'px, ' + mouseY + 'px)'
     }
 
+    var rafId = null
+
     function animate() {
       ringX += (mouseX - ringX) * 0.12
       ringY += (mouseY - ringY) * 0.12
       ring.style.transform = 'translate(' + ringX + 'px, ' + ringY + 'px)'
-      requestAnimationFrame(animate)
+      rafId = requestAnimationFrame(animate)
     }
 
     function onMouseEnterLink() {
@@ -55,6 +57,7 @@ export default function Cursor() {
     return function() {
       window.removeEventListener('mousemove', onMouseMove)
       observer.disconnect()
+      if (rafId) cancelAnimationFrame(rafId)
     }
   }, [])
 

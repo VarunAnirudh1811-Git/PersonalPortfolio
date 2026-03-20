@@ -33,9 +33,10 @@ export default function Hero() {
       if (foregroundRef.current)
         foregroundRef.current.style.transform = 'translateY(' + (scrollY * 0.60) + 'px)'
 
-      if (textRef.current)
+      if (textRef.current) {
         textRef.current.style.transform = 'translateY(' + (scrollY * 0.25) + 'px)'
-        textRef.current.style.opacity   = 1 - (scrollY / 500)
+        textRef.current.style.opacity   = Math.max(0, 1 - (scrollY / 500))
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })

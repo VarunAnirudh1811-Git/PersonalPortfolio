@@ -2,6 +2,11 @@
    NAVBAR
    ============================================ */
 
+.navbar-wrapper {
+  position: relative;
+  z-index: 999;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -161,6 +166,7 @@
   top: var(--navbar-height);
   left: 0;
   width: 100%;
+  z-index: 1001;
   background: var(--color-navbar-solid);
   backdrop-filter: blur(12px);
   flex-direction: column;
