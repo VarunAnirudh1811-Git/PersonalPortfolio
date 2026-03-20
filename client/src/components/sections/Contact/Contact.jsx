@@ -3,8 +3,8 @@ import './Contact.css'
 
 const SOCIALS = [
   { label: 'GitHub',   href: 'https://github.com/VarunAnirudh1811-Git', icon: 'GH' },
-  { label: 'LinkedIn', href: '#', icon: 'LI' },
-  { label: 'Twitter',  href: '#', icon: 'TW' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/varun-anirudh', icon: 'LI' },
+  { label: 'Twitter',  href: 'https://twitter.com/VarunAnirudh', icon: 'TW' },
   { label: 'Email',    href: 'mailto:your@email.com', icon: 'EM' },
 ]
 
@@ -27,9 +27,7 @@ export default function Contact() {
     var field = e.target.name
     var value = e.target.value
     setForm(function(prev) {
-      var next = { name: prev.name, email: prev.email, message: prev.message }
-      next[field] = value
-      return next
+      return { ...prev, [field]: value }
     })
   }
 
@@ -42,14 +40,16 @@ export default function Contact() {
     setError('')
     setStatus('loading')
     
-    // Create new AbortController for this request
-    abortControllerRef.current = new AbortController()
+    // Use environment variable or fallback to relative path for Vite proxy
+    const apiUrl = import.meta.env.VITE_API_URL 
+      ? `${import.meta.env.VITE_API_URL}/api/contact`
+      : '/api/contact'
     
-    fetch('/api/contact', {
+    fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
-      signal: abortControllerRef.current.signal
+      signal: AbortSignal.timeout(10000) // 10 second timeout
     })
     .then(function(res) { return res.json() })
     .then(function(data) {
@@ -162,6 +162,12 @@ export default function Contact() {
                   placeholder="Tell me about your project..."
                   value={form.message}
                   onChange={handleChange}
+                  onKeyDown={function(e) {
+                    // Allow Ctrl+Enter or Cmd+Enter to submit, but Enter alone adds newline
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                      handleSubmit(e)
+                    }
+                  }}
                   rows="5"
                 ></textarea>
               </div>

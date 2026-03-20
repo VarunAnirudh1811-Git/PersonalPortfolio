@@ -36,7 +36,7 @@ export default function Games() {
     if (index > GAMES.length - visible) {
       setIndex(Math.max(0, GAMES.length - visible))
     }
-  }, [visible])
+  }, [visible, index])
 
   // Clear hovered state when slide changes
   useEffect(function() {
@@ -124,7 +124,15 @@ export default function Games() {
                       )
                     })}
                   </div>
-                  <a href="#" className="games__card-link">View &#8594;</a>
+                  <button 
+                    type="button"
+                    className="games__card-link" 
+                    onClickCapture={function() { e.preventDefault() }} 
+                    disabled
+                    title="Coming soon"
+                  >
+                    View &#8594;
+                  </button>
                 </div>
 
               </div>

@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-@import './theme.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './theme.css';
 
 /* ============================================
    GLOBAL - Reset, base styles, scrollbar
@@ -27,7 +28,7 @@ body {
   font-size: var(--text-base);
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: none; /* hidden � replaced by custom cursor */
+
 }
 
 /* --- Scrollbar --- */

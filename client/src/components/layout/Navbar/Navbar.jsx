@@ -59,14 +59,14 @@ export default function Navbar() {
           <a href="#contact" className="navbar__cta" onClick={function(e) { handleNavClick(e, '#contact') }}>
             Hire Me
           </a>
-          <button className={hamburgerClass} onClick={function() { setMenuOpen(!menuOpen) }} aria-label="Toggle menu">
+          <button className={hamburgerClass} onClick={function() { setMenuOpen(!menuOpen) }} aria-label="Toggle menu" aria-expanded={menuOpen}>
             <span></span>
             <span></span>
             <span></span>
           </button>
         </div>
       </nav>
-      <div className={mobileClass}>
+      <div className={mobileClass} role="navigation" aria-label="Mobile navigation">
         {NAV_LINKS.map(function(link) {
           return (
             <a key={link.href} href={link.href} className="navbar__mobile-link" onClick={function(e) { handleNavClick(e, link.href) }}>

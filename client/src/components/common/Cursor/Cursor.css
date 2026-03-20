@@ -23,6 +23,10 @@
   will-change: transform;
 }
 
+.cursor-dot.cursor-dot--hover {
+  will-change: auto;
+}
+
 /* Larger ring — lags behind for smooth feel */
 .cursor-ring {
   position: fixed;

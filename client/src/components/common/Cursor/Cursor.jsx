@@ -6,6 +6,19 @@ export default function Cursor() {
   const ringRef  = useRef(null)
 
   useEffect(function() {
+    // Don't render custom cursor on touch devices
+    var isTouchDevice = function() {
+      return (
+        (typeof window !== 'undefined' &&
+          ('ontouchstart' in window ||
+            (window.DocumentTouch && typeof document !== 'undefined' && document instanceof window.DocumentTouch))) ||
+        (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0)
+      )
+    }
+
+    if (isTouchDevice()) {
+      return
+    }
     var dot  = dotRef.current
     var ring = ringRef.current
 
@@ -42,6 +55,9 @@ export default function Cursor() {
     function addLinkListeners() {
       var links = document.querySelectorAll('a, button')
       links.forEach(function(el) {
+        // Remove old listeners first to prevent duplicates
+        el.removeEventListener('mouseenter', onMouseEnterLink)
+        el.removeEventListener('mouseleave', onMouseLeaveLink)
         el.addEventListener('mouseenter', onMouseEnterLink)
         el.addEventListener('mouseleave', onMouseLeaveLink)
       })

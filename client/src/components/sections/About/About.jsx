@@ -8,6 +8,11 @@ const STATS = [
 ]
 
 export default function About() {
+  function handleContactClick(e) {
+    e.preventDefault()
+    document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <section className="about section" id="about">
       <div className="container">
@@ -33,10 +38,7 @@ export default function About() {
                 <span className="about__btn-icon">↓</span>
                 Download Resume
               </a>
-              <a href="#contact" className="about__btn-contact" onClick={function(e) {
-                e.preventDefault()
-                document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })
-              }}>
+              <a href="#contact" className="about__btn-contact" onClick={handleContactClick}>
                 Let's Talk
               </a>
             </div>
